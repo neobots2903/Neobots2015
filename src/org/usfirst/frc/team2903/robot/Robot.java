@@ -4,9 +4,14 @@ package org.usfirst.frc.team2903.robot;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import org.usfirst.frc.team2903.robot.commands.ExampleCommand;
-import org.usfirst.frc.team2903.robot.subsystems.ExampleSubsystem;
+
+import org.usfirst.frc.team2903.robot.commands.Auto;
+import org.usfirst.frc.team2903.robot.commands.Teleop;
+import org.usfirst.frc.team2903.robot.subsystems.Drive;
+import org.usfirst.frc.team2903.robot.subsystems.Elevator;
+import org.usfirst.frc.team2903.robot.subsystems.Pneumatics;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -17,11 +22,14 @@ import org.usfirst.frc.team2903.robot.subsystems.ExampleSubsystem;
  */
 public class Robot extends IterativeRobot {
 
-	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
+	public static final Drive driveSubsystem = new Drive();
+	public static final Elevator elevatorSubsystem = new Elevator();
+	public static final Pneumatics pneumaticsSubsystem = new Pneumatics();
 	public static OI oi;
 
     Command autonomousCommand;
-
+    Command teleopCommand;
+    
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
@@ -29,7 +37,8 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
 		oi = new OI();
         // instantiate the command used for the autonomous period
-        autonomousCommand = new ExampleCommand();
+        autonomousCommand = new Auto();
+        teleopCommand = new Teleop();
     }
 	
 	public void disabledPeriodic() {

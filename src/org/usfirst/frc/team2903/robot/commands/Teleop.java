@@ -2,11 +2,15 @@ package org.usfirst.frc.team2903.robot.commands;
 
 import org.usfirst.frc.team2903.robot.Robot;
 
+import edu.wpi.first.wpilibj.command.Command;
+
 public class Teleop extends Command {
 
-    public ExampleCommand() {
+    public Teleop() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.exampleSubsystem);
+    	requires(Robot.driveSubsystem);
+        requires(Robot.elevatorSubsystem);
+        requires(Robot.pneumaticsSubsystem);
     }
 
     // Called just before this Command runs the first time

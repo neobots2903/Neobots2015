@@ -1,5 +1,7 @@
 package org.usfirst.frc.team2903.robot.subsystems;
 
+import edu.wpi.first.wpilibj.command.Subsystem;
+
 public class Pneumatics extends Subsystem {
     
     // Put methods for controlling this subsystem
