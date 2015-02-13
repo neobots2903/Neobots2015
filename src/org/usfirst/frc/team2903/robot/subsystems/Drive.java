@@ -1,5 +1,6 @@
 package org.usfirst.frc.team2903.robot.subsystems;
 
+import edu.wpi.first.wpilibj.*;
 import org.usfirst.frc.team2903.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -36,6 +37,12 @@ public class Drive extends Subsystem {
 		leftFrontMotor1.set(-1);
 		leftBackMotor1.set(-1);
 		rightBackMotor1.set(-1);
+	}
+	
+	@Override
+	protected void initDefaultCommand() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
