@@ -2,12 +2,15 @@ package org.usfirst.frc.team2903.robot.subsystems;
 
 import org.usfirst.frc.team2903.robot.RobotMap;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Elevator extends Subsystem {
 	
+	public DigitalInput bottomLimit = new DigitalInput(1);
+	public DigitalInput upperLimit = new DigitalInput(1);
 	public Jaguar elevatorM = new Jaguar(RobotMap.elevatorM);
     //software control of breaking system
 	Encoder encoder = new Encoder(1, 2);
@@ -66,7 +69,6 @@ public class Elevator extends Subsystem {
     }
     
     public void moveElevatorDown(){
-    	toteHeight--; 
     	switch (toteHeight) {
 		case 1:
 			elevatorM.set(-0.5);
@@ -104,12 +106,22 @@ public class Elevator extends Subsystem {
 			break;
 		}
     	
-    	
+    	if(toteHeight > 0){
+    		toteHeight--;
+    	}
     	
     }
     
     public void elevatorReset(){
-    	
-    	
+		if (toteHeight != 0) {
+			if (bottomLimit.equals(false)) {
+				elevatorM.set(-0.5);
+			}
+			if (bottomLimit.equals(true)) {
+				elevatorM.set(0);
+				encoder.reset();
+				toteHeight = 0;
+			}
+		}
     }
 }
