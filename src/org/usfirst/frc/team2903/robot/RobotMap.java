@@ -7,10 +7,10 @@ package org.usfirst.frc.team2903.robot;
  */
 public class RobotMap {
 
-    public static int HDriveM1 = 1;
-    public static int HDriveM2 = 2;
-    public static int HDriveM3 = 3;
-    public static int HDriveM4 = 4;
-    public static int HDriveM5 = 5;
-    public static int relevatorM = 6;
+    public static int HDriveM1 = 0;
+    public static int HDriveM2 = 1;
+    public static int HDriveM3 = 2;
+    public static int HDriveM4 = 3;
+    public static int HDriveM5 = 4;
+    public static int elevatorM = 5;
 }

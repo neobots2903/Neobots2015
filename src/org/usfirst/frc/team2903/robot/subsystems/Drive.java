@@ -15,28 +15,11 @@ public class Drive extends Subsystem {
 	public Talon leftBackMotor1 = new Talon(RobotMap.HDriveM1);
 	public Talon rightBackMotor1 = new Talon(RobotMap.HDriveM4);
 	public Talon middleMotor1 = new Talon(RobotMap.HDriveM5);
+	public RobotDrive hDrive = new RobotDrive(1,2,3,4);
 	
-	public void forward()
-	{
-		rightFrontMotor1.set(1);
-		leftFrontMotor1.set(1);
-		leftBackMotor1.set(1);
-		rightBackMotor1.set(1);
-	}
-	public void left()
-	{
-		middleMotor1.set(-1);
-	}
-	public void right()
-	{
-		middleMotor1.set(1);
-	}
-	public void backward()
-	{
-		rightFrontMotor1.set(-1);
-		leftFrontMotor1.set(-1);
-		leftBackMotor1.set(-1);
-		rightBackMotor1.set(-1);
+	public void drive(double xAxis,double yAxis, double mid){
+		hDrive.arcadeDrive(xAxis,yAxis);
+		middleMotor1.set(mid);
 	}
 	
 	@Override
