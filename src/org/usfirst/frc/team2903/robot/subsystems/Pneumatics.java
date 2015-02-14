@@ -8,7 +8,7 @@ public class Pneumatics extends Subsystem {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
 	public Solenoid mySol1 = new Solenoid(1); 
-	Public mySol1				/* This makes the variable called
+	public void mySol1(){}				/* This makes the variable called
 												 mySol1 a Solenoid from port
 												 1 and allows us to activate 
 												 it*/
