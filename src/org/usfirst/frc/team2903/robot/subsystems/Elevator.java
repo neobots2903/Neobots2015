@@ -13,6 +13,7 @@ public class Elevator extends Subsystem {
 	Encoder encoder = new Encoder(1, 2);
 	
 	int count = encoder.get();
+	int heightValue = 0;
 	
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
@@ -23,23 +24,26 @@ public class Elevator extends Subsystem {
     }
     
     public void moveElevatorUp() {
-    	//if(count < __ ){
-    		
-    	//}
+    	if(count < heightValue && heightValue != 100){
+    	relevatorM.set(0.5);
+    	heightValue++;
+    	}
     	
     }
     
     public void moveElevatorDown(){
-    	//if(count > __ ){
-    	
-       //}
+    	if(count > heightValue && heightValue != 0){
+    	relevatorM.set(-0.5);
+    	heightValue--;
+        }
     	
     }
     
     public void elevatorReset(){
-    	//if(count > __ ){
-    	
-        //}
+    	while(heightValue != 0){
+    	relevatorM.set(-0.5);
+    	heightValue--;
+        }
     	
     }
 }
