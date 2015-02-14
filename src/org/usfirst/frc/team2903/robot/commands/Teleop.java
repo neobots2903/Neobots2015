@@ -20,7 +20,7 @@ public class Teleop extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.driveSubsystem.drive(OI.controller.getRawAxis(0), OI.controller.getRawAxis(1),OI.controller.getRawAxis(2));
+    	Robot.driveSubsystem.drive(OI.controller.getRawAxis(0), OI.controller.getRawAxis(2),OI.controller.getRawAxis(1));
     }
 
     // Make this return true when this Command no longer needs to run execute()
