@@ -16,6 +16,7 @@ public class Elevator extends Subsystem {
 	Encoder encoder = new Encoder(1, 2);
 	
 	int count = encoder.get();
+	boolean topLimitAct = upperLimit.get();
 	int heightValue = 0;
 	int toteHeight = 0;
 	
@@ -28,44 +29,45 @@ public class Elevator extends Subsystem {
     }
     
     public void moveElevatorUp() {
-    	toteHeight++; 
-    	switch (toteHeight) {
-		case 1:
-			elevatorM.set(0.5);
-			if(28 < count && count < 32){
-				elevatorM.set(0);
-			}
-			break;
-		case 2:
-			elevatorM.set(0.5);
-			if(33 < count && count < 37){
-				elevatorM.set(0);
-			}
-			break;
-		case 3:
-			elevatorM.set(0.5);
-			if(38 < count && count < 42){
-				elevatorM.set(0);
-			}
-			break;
-		case 4:
-			elevatorM.set(0.5);
-			if(43 < count && count < 47){
-				elevatorM.set(0);
-			}
-			break;
-		case 5:
-			elevatorM.set(0.5);
-			if(48 < count && count < 52){
-				elevatorM.set(0);
-			}
-			break;
+		if (!topLimitAct && toteHeight<5) {
+			toteHeight++;
+			switch (toteHeight) {
+			case 1:
+				elevatorM.set(0.5);
+				if (28 < count && count < 32) {
+					elevatorM.set(0);
+				}
+				break;
+			case 2:
+				elevatorM.set(0.5);
+				if (33 < count && count < 37) {
+					elevatorM.set(0);
+				}
+				break;
+			case 3:
+				elevatorM.set(0.5);
+				if (38 < count && count < 42) {
+					elevatorM.set(0);
+				}
+				break;
+			case 4:
+				elevatorM.set(0.5);
+				if (43 < count && count < 47) {
+					elevatorM.set(0);
+				}
+				break;
+			case 5:
+				elevatorM.set(0.5);
+				if (48 < count && count < 52) {
+					elevatorM.set(0);
+				}
+				break;
 
-		default:
-			elevatorM.set(0);
-			break;
+			default:
+				elevatorM.set(0);
+				break;
+			}
 		}
-    	
     }
     
     public void moveElevatorDown(){

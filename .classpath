@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="C:/Users/robotics/wpilib/java/current/lib/NetworkTables.jar"/>
-	<classpathentry kind="lib" path="C:/Users/robotics/wpilib/java/current/lib/NetworkTables-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Users/robotics/wpilib/java/current/lib/WPILib.jar"/>
-	<classpathentry kind="lib" path="C:/Users/robotics/wpilib/java/current/lib/WPILib-sources.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/robot.HSSTUDENT/wpilib/java/current/lib/NetworkTables.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/robot.HSSTUDENT/wpilib/java/current/lib/NetworkTables-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/robot.HSSTUDENT/wpilib/java/current/lib/WPILib.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/robot.HSSTUDENT/wpilib/java/current/lib/WPILib-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
