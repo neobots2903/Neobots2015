@@ -19,7 +19,7 @@ public class Drive extends Subsystem {
 	
 	public void drive(double xAxis,double yAxis, double mid){
 		hDrive.arcadeDrive(yAxis,xAxis);
-		//middleMotor1.set(mid);
+		middleMotor1.set(mid);
 	}
 	
 	@Override
