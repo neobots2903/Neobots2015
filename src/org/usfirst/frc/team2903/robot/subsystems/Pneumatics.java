@@ -54,7 +54,6 @@ public class Pneumatics extends Subsystem {
 	public void armReset()
 	{
 		openarms();
-		//doubleSolOpen.set(Value.kOff);
 	}
 	
 	public void armsOpenClose()
