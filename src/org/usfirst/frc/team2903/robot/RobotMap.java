@@ -7,10 +7,25 @@ package org.usfirst.frc.team2903.robot;
  */
 public class RobotMap {
 
+	
+	//PWM
     public static int HDriveM1 = 0;
     public static int HDriveM2 = 1;
     public static int HDriveM3 = 2;
     public static int HDriveM4 = 3;
     public static int HDriveM5 = 4;
     public static int elevatorM = 5;
+    
+    //DIO
+    public static int botLimitSwitch = 1;
+    public static int topLimitSwitch = 2;
+    
+    //Pneumatics
+    public static int RIGHTSOLOPEN = 0;
+	public static int RIGHTSOLCLOSE = 1;
+	public static int LEFTSOLOPEN = 6;
+	public static int LEFTSOLCLOSE = 7;
+	//Sol
+	public static int brakeSol = 3;
+    
 }

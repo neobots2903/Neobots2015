@@ -1,22 +1,16 @@
 package org.usfirst.frc.team2903.robot.subsystems;
 
+import org.usfirst.frc.team2903.robot.RobotMap;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 public class Pneumatics extends Subsystem {
-	
-	final int RIGHTSOLOPEN = 0;
-	final int RIGHTSOLCLOSE = 1;
-	final int LEFTSOLOPEN = 6;
-	final int LEFTSOLCLOSE = 7;
 
-	public Solenoid rightSolOpen = new Solenoid(RIGHTSOLOPEN); 
-	public Solenoid rightSolClose = new Solenoid(RIGHTSOLCLOSE);
-	public Solenoid leftSolOpen = new Solenoid(LEFTSOLOPEN);
-	public Solenoid leftSolClose = new Solenoid(LEFTSOLCLOSE);
-	//public DoubleSolenoid doubleSolOpen = new DoubleSolenoid(RIGHTSOLOPEN, LEFTSOLOPEN);
+	public Solenoid rightSolOpen = new Solenoid(RobotMap.RIGHTSOLOPEN); 
+	public Solenoid rightSolClose = new Solenoid(RobotMap.RIGHTSOLCLOSE);
+	public Solenoid leftSolOpen = new Solenoid(RobotMap.LEFTSOLOPEN);
+	public Solenoid leftSolClose = new Solenoid(RobotMap.LEFTSOLCLOSE);
 	public boolean isOpen = false; 
 	
 		
