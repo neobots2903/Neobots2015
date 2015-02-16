@@ -10,8 +10,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Elevator extends Subsystem {
 	
-	public DigitalInput bottomLimit = new DigitalInput(1);
-	public DigitalInput upperLimit = new DigitalInput(1);
+	public DigitalInput bottomLimit = new DigitalInput(3);
+	public DigitalInput upperLimit = new DigitalInput(4);
 	public Jaguar elevatorM = new Jaguar(RobotMap.elevatorM);
     //software control of breaking system
 	public Solenoid brakeSol = new Solenoid(3);
@@ -29,6 +29,9 @@ public class Elevator extends Subsystem {
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
+    }
+    public void elevatorMotor(double value){
+    	elevatorM.set(value);
     }
     
     public void moveElevatorUp() {
@@ -73,6 +76,41 @@ public class Elevator extends Subsystem {
 		}
     }
     
+    public void moveElevatorUpCheck() {
+		if (!topLimitAct && toteHeight<5) {
+			switch (toteHeight) {
+			case 1:
+				if (28 < count && count < 32) {
+					elevatorM.set(0);
+				}
+				break;
+			case 2:
+				if (33 < count && count < 37) {
+					elevatorM.set(0);
+				}
+				break;
+			case 3:
+				if (38 < count && count < 42) {
+					elevatorM.set(0);
+				}
+				break;
+			case 4:
+				if (43 < count && count < 47) {
+					elevatorM.set(0);
+				}
+				break;
+			case 5:
+				if (48 < count && count < 52) {
+					elevatorM.set(0);
+				}
+				break;
+
+			default:
+				elevatorM.set(0);
+				break;
+			}
+		}
+    }
     public void moveElevatorDown(){
     	switch (toteHeight) {
 		case 1:

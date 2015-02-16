@@ -7,27 +7,29 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 public class Pneumatics extends Subsystem {
 	
-	final int RIGHTSOLOPEN = 1;
-	final int RIGHTSOLCLOSE = 2;
+	final int RIGHTSOLOPEN = 0;
+	final int RIGHTSOLCLOSE = 1;
 	final int LEFTSOLOPEN = 6;
 	final int LEFTSOLCLOSE = 7;
 
 	public Solenoid rightSolOpen = new Solenoid(RIGHTSOLOPEN); 
-	public Solenoid rightSolClose = new Solenoid(RIGHTSOLOPEN);
+	public Solenoid rightSolClose = new Solenoid(RIGHTSOLCLOSE);
 	public Solenoid leftSolOpen = new Solenoid(LEFTSOLOPEN);
 	public Solenoid leftSolClose = new Solenoid(LEFTSOLCLOSE);
-	public DoubleSolenoid doubleSolOpen = new DoubleSolenoid(RIGHTSOLOPEN, LEFTSOLOPEN);
+	//public DoubleSolenoid doubleSolOpen = new DoubleSolenoid(RIGHTSOLOPEN, LEFTSOLOPEN);
 	public boolean isOpen = false; 
 	
 		
 	public void openarms()
 	{
-		doubleSolOpen.set(Value.kForward);
+		leftarmopen();
+		rightarmopen();
 	}
 	
 	public void closearms()
 	{
-		doubleSolOpen.set(Value.kReverse);
+		leftarmclose();
+		rightarmclose();
 	}
 	
 	public void leftarmopen()
@@ -45,20 +47,20 @@ public class Pneumatics extends Subsystem {
 	public void rightarmopen()
 	{
 		rightSolOpen.set(true);
-		rightSolOpen.set(false);
+		rightSolClose.set(false);
 	}
 	
 	public void rightarmclose()
 	{
 		rightSolOpen.set(false);
-		rightSolOpen.set(true);
+		rightSolClose.set(true);
 	}
 	
 	
 	public void armReset()
 	{
 		openarms();
-		doubleSolOpen.set(Value.kOff);
+		//doubleSolOpen.set(Value.kOff);
 	}
 	
 	public void armsOpenClose()
