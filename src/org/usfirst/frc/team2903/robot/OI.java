@@ -8,5 +8,7 @@ import edu.wpi.first.wpilibj.Joystick;
  */
 public class OI {
 	public static Joystick controller = new Joystick(0);
+	public static Joystick Joy1 = new Joystick(2);
+	public static Joystick Joy2 = new Joystick(3);
 }
 

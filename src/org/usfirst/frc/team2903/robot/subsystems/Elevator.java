@@ -18,7 +18,7 @@ public class Elevator extends Subsystem {
 
 	Encoder encoder = new Encoder(1, 2);
 
-	int count = encoder.get();
+	public int count = encoder.get();
 	boolean topLimitAct = upperLimit.get();
 	int heightValue = 0;
 	int toteHeight = 0;
@@ -29,7 +29,12 @@ public class Elevator extends Subsystem {
 	public void elevatorMotor(double value) {
 		elevatorM.set(value);
 	}
-
+	public void brakeEnable(){
+		brakeSol.set(true);
+	}
+	public void brakeDisable(){
+		brakeSol.set(false);
+	}
 	public void moveElevatorUp() {
 		if (!topLimitAct && toteHeight < 5) {
 			toteHeight++;

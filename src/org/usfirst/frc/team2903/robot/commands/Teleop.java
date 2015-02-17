@@ -4,6 +4,7 @@ import org.usfirst.frc.team2903.robot.OI;
 import org.usfirst.frc.team2903.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Teleop extends Command {
 
@@ -16,8 +17,10 @@ public class Teleop extends Command {
     protected void initialize() {
     }
 
-    protected void execute() {
+    @SuppressWarnings("deprecation")
+	protected void execute() {
     	//Robot.driveSubsystem.drive(OI.controller.getRawAxis(0), OI.controller.getRawAxis(2),OI.controller.getRawAxis(1));
+    	Robot.driveSubsystem.drive(OI.Joy2.getX(), OI.Joy1.getY(), OI.Joy1.getX());
     	if(OI.controller.getRawButton(5)){
     		Robot.pneumaticsSubsystem.leftarmopen();
     	}if(OI.controller.getRawButton(6)){
@@ -27,7 +30,14 @@ public class Teleop extends Command {
     	}if(OI.controller.getRawButton(8)){
     		Robot.pneumaticsSubsystem.rightarmclose();
     	}
-    	Robot.elevatorSubsystem.elevatorMotor(OI.controller.getRawAxis(3));
+    	Robot.elevatorSubsystem.elevatorMotor(OI.controller.getRawAxis(1));
+    	if(OI.controller.getRawButton(2)){
+    	Robot.elevatorSubsystem.brakeEnable();
+    	} else if(OI.controller.getRawButton(3)){
+        	Robot.elevatorSubsystem.brakeDisable();
+        }
+    	SmartDashboard.putNumber("Encoder", Robot.elevatorSubsystem.count);
+    	
     }
 
     protected boolean isFinished() {

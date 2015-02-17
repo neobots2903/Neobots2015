@@ -17,8 +17,8 @@ public class RobotMap {
     public static int elevatorM = 5;
     
     //DIO
-    public static int botLimitSwitch = 1;
-    public static int topLimitSwitch = 2;
+    public static int botLimitSwitch = 4;
+    public static int topLimitSwitch = 5;
     
     //Pneumatics
     public static int RIGHTSOLOPEN = 0;
