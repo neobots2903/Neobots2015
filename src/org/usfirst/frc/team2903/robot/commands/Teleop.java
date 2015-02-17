@@ -15,10 +15,13 @@ public class Teleop extends Command {
     }
 
     protected void initialize() {
+    	Robot.elevatorSubsystem.encoder.reset();
     }
 
-    @SuppressWarnings("deprecation")
+   // @SuppressWarnings("deprecation")
 	protected void execute() {
+    	
+
     	//Robot.driveSubsystem.drive(OI.controller.getRawAxis(0), OI.controller.getRawAxis(2),OI.controller.getRawAxis(1));
     	Robot.driveSubsystem.drive(OI.Joy2.getX(), OI.Joy1.getY(), OI.Joy1.getX());
     	if(OI.controller.getRawButton(5)){
@@ -36,7 +39,8 @@ public class Teleop extends Command {
     	} else if(OI.controller.getRawButton(3)){
         	Robot.elevatorSubsystem.brakeDisable();
         }
-    	SmartDashboard.putNumber("Encoder", Robot.elevatorSubsystem.count);
+    	SmartDashboard.putNumber("Encoder", Robot.elevatorSubsystem.encoder.get());
+    	SmartDashboard.putNumber("Tote Height", Robot.elevatorSubsystem.toteHeight);
     	
     }
 
