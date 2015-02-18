@@ -17,7 +17,7 @@ public class Teleop extends Command {
     }
 
     protected void initialize() {
-    	Robot.elevatorSubsystem.encoder.reset();
+    	//Robot.elevatorSubsystem.encoder.reset();
     }
 
    // @SuppressWarnings("deprecation")
@@ -36,12 +36,6 @@ public class Teleop extends Command {
     	}if(OI.controller.getRawButton(8)){
     		Robot.pneumaticsSubsystem.rightarmclose();
     	}
-    	//Robot.elevatorSubsystem.elevatorMotor(OI.controller.getRawAxis(1));
-    	//if(OI.controller.getRawButton(2)){
-    	//Robot.elevatorSubsystem.brakeEnable();
-    	//} else if(OI.controller.getRawButton(3)){
-        //	Robot.elevatorSubsystem.brakeDisable();
-        //}
     	if(OI.controller.getRawButton(2)){
     		Robot.elevatorSubsystem.moveElevatorUp();
     		edu.wpi.first.wpilibj.Timer.delay(.1);
@@ -49,6 +43,11 @@ public class Teleop extends Command {
     		Robot.elevatorSubsystem.moveElevatorDown();
     		edu.wpi.first.wpilibj.Timer.delay(.1);
     	}
+    	else if(OI.controller.getRawButton(4)){
+    		Robot.elevatorSubsystem.toteHeight = 0;
+    		Robot.elevatorSubsystem.elevatorReset();
+    	}
+    	
     	SmartDashboard.putNumber("Encoder", Robot.elevatorSubsystem.encoder.get());
     	SmartDashboard.putNumber("Tote Height", Robot.elevatorSubsystem.toteHeight);
     	SmartDashboard.putBoolean("Top Limit", Robot.elevatorSubsystem.topLimitAct);

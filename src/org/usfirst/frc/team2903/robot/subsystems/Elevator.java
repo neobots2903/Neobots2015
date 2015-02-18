@@ -21,22 +21,20 @@ public class Elevator extends Subsystem {
 	public boolean topLimitAct = upperLimit.get();
 	int heightValue = 0;
 	public int toteHeight = 0;
-	double speedUp = 0.5;
+	double speedUp = 0.9;
 	double speedDown = 0.2;
 	
 	
 	int tote0Min = 0;
 	int tote0Max = 20;
-	int tote1Min = 410;
-	int tote1Max = 430;
-	int tote2Min = 830;
-	int tote2Max = 850;
-	int tote3Min = 1250;
-	int tote3Max = 1270;
-	int tote4Min = 1690;
-	int tote4Max = 1710;
-	int tote5Min = 2110;
-	int tote5Max = 2130;
+	int tote1Min = 470;
+	int tote1Max = 490;
+	int tote2Min = 760;
+	int tote2Max = 780;
+	int tote3Min = 1000;
+	int tote3Max = 1020;
+	int tote4Min = 1170;
+	int tote4Max = 1190;
 	int flex = 25;//+and- flex
 
 	public void initDefaultCommand() {
@@ -48,14 +46,9 @@ public class Elevator extends Subsystem {
 	public void elevatorMotor(double value) {
 		elevatorM.set(value);
 	}
-	public void brakeEnable(){
-		brakeSol.set(true);
-	}
-	public void brakeDisable(){
-		brakeSol.set(false);
-	}
+	
 	public void moveElevatorUp() {
-		if (toteHeight < 5) {
+		if (toteHeight < 4) {
 			toteHeight++;
 		}
 			switch (toteHeight) {
@@ -83,12 +76,6 @@ public class Elevator extends Subsystem {
 					elevatorM.set(0);
 				}
 				break;
-			case 5:
-				elevatorM.set(speedUp);
-				if (tote5Min < count() && count() < tote5Max) {
-					elevatorM.set(0);
-				}
-				break;
 
 			default:
 				elevatorM.set(0);
@@ -98,7 +85,7 @@ public class Elevator extends Subsystem {
 	}
 
 	public void moveElevatorUpCheck() {
-		if (toteHeight <= 5) {
+		if (toteHeight <= 4) {
 			switch (toteHeight) {
 			case 1:
 				if (tote1Min < encoder.get() && encoder.get() < tote1Max) {
@@ -120,11 +107,6 @@ public class Elevator extends Subsystem {
 					elevatorM.set(0);
 				}
 				break;
-			case 5:
-				if (tote5Min < count() && count() < tote5Max) {
-					elevatorM.set(0);
-				}
-				break;
 
 			default:
 				break;
@@ -136,7 +118,7 @@ public class Elevator extends Subsystem {
 		toteHeight--;
 		switch (toteHeight) {
 		case 0:
-			elevatorM.set(speedDown);
+			elevatorM.set(0.6);
 			brakeSol.set(true);
 			edu.wpi.first.wpilibj.Timer.delay(.1);
 			elevatorM.set(0);
@@ -146,7 +128,7 @@ public class Elevator extends Subsystem {
 			}
 			break;
 		case 1:
-			elevatorM.set(0.2);
+			elevatorM.set(0.6);
 			brakeSol.set(true);
 			edu.wpi.first.wpilibj.Timer.delay(.1);
 			elevatorM.set(0);
@@ -156,7 +138,7 @@ public class Elevator extends Subsystem {
 			}
 			break;
 		case 2:
-			elevatorM.set(speedDown);
+			elevatorM.set(0.6);
 			brakeSol.set(true);
 			edu.wpi.first.wpilibj.Timer.delay(.1);
 			elevatorM.set(0);
@@ -166,7 +148,7 @@ public class Elevator extends Subsystem {
 			}
 			break;
 		case 3:
-			elevatorM.set(speedDown);
+			elevatorM.set(0.6);
 			brakeSol.set(true);
 			edu.wpi.first.wpilibj.Timer.delay(.1);
 			elevatorM.set(0);
@@ -176,7 +158,7 @@ public class Elevator extends Subsystem {
 			}
 			break;
 		case 4:
-			elevatorM.set(speedDown);
+			elevatorM.set(0.6);
 			brakeSol.set(true);
 			edu.wpi.first.wpilibj.Timer.delay(.1);
 			elevatorM.set(0);
@@ -218,12 +200,6 @@ public class Elevator extends Subsystem {
 				brakeSol.set(false);
 			}
 			break;
-		case 4:
-			if (tote4Min < count() && count() < tote4Max) {
-				elevatorM.set(0);
-				brakeSol.set(false);
-			}
-			break;
 
 		default:
 			break;
@@ -232,15 +208,15 @@ public class Elevator extends Subsystem {
 	}
 
 	public void elevatorReset() {
-		if (toteHeight != 0) {
-			if (bottomLimit.equals(false)) {
-				elevatorM.set(0);
-			}
-			if (bottomLimit.equals(true)) {
-				elevatorM.set(0);
+		//if (toteHeight != 0) {
+		//	if (bottomLimit.equals(false)) {
+		//		elevatorM.set(0);
+		//	}
+		//	if (bottomLimit.equals(true)) {
+		//		elevatorM.set(0);
 				encoder.reset();
-				toteHeight = 0;
-			}
-		}
+		//		toteHeight = 0;
+		//	}
+		//}
 	}
 }
