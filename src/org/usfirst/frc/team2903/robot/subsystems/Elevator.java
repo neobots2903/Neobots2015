@@ -21,6 +21,8 @@ public class Elevator extends Subsystem {
 	public boolean topLimitAct = upperLimit.get();
 	int heightValue = 0;
 	public int toteHeight = 0;
+	double speedUp = 0.5;
+	double speedDown = 0.2;
 	
 	
 	int tote0Min = 0;
@@ -58,31 +60,31 @@ public class Elevator extends Subsystem {
 		}
 			switch (toteHeight) {
 			case 1:
-				elevatorM.set(0.5);
+				elevatorM.set(speedUp);
 				if (tote1Min < count() && count() < tote1Max) {
 					elevatorM.set(0);
 				}
 				break;
 			case 2:
-				elevatorM.set(0.5);
+				elevatorM.set(speedUp);
 				if (tote2Min < count() && count() < tote2Max) {
 					elevatorM.set(0);
 				}
 				break;
 			case 3:
-				elevatorM.set(0.5);
+				elevatorM.set(speedUp);
 				if (tote3Min < count() && count() < tote3Max) {
 					elevatorM.set(0);
 				}
 				break;
 			case 4:
-				elevatorM.set(0.5);
+				elevatorM.set(speedUp);
 				if (tote4Min < count() && count() < tote4Max) {
 					elevatorM.set(0);
 				}
 				break;
 			case 5:
-				elevatorM.set(0.5);
+				elevatorM.set(speedUp);
 				if (tote5Min < count() && count() < tote5Max) {
 					elevatorM.set(0);
 				}
@@ -134,7 +136,7 @@ public class Elevator extends Subsystem {
 		toteHeight--;
 		switch (toteHeight) {
 		case 0:
-			elevatorM.set(0.2);
+			elevatorM.set(speedDown);
 			brakeSol.set(true);
 			edu.wpi.first.wpilibj.Timer.delay(.1);
 			elevatorM.set(0);
@@ -154,7 +156,7 @@ public class Elevator extends Subsystem {
 			}
 			break;
 		case 2:
-			elevatorM.set(0.2);
+			elevatorM.set(speedDown);
 			brakeSol.set(true);
 			edu.wpi.first.wpilibj.Timer.delay(.1);
 			elevatorM.set(0);
@@ -164,7 +166,7 @@ public class Elevator extends Subsystem {
 			}
 			break;
 		case 3:
-			elevatorM.set(0.2);
+			elevatorM.set(speedDown);
 			brakeSol.set(true);
 			edu.wpi.first.wpilibj.Timer.delay(.1);
 			elevatorM.set(0);
@@ -174,7 +176,7 @@ public class Elevator extends Subsystem {
 			}
 			break;
 		case 4:
-			elevatorM.set(0.2);
+			elevatorM.set(speedDown);
 			brakeSol.set(true);
 			edu.wpi.first.wpilibj.Timer.delay(.1);
 			elevatorM.set(0);
