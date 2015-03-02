@@ -22,7 +22,7 @@ public class Teleop extends Command {
 
    // @SuppressWarnings("deprecation")
 	protected void execute() {
-    	
+    		Robot.elevatorSubsystem.speedControl();
 		Robot.elevatorSubsystem.moveElevatorUpCheck();
 		Robot.elevatorSubsystem.moveElevatorDownCheck();
     	//Robot.driveSubsystem.drive(OI.controller.getRawAxis(0), OI.controller.getRawAxis(2),OI.controller.getRawAxis(1));
