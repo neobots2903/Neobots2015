@@ -53,6 +53,9 @@ public class Elevator extends Subsystem {
 
 	public void speedControl() {
 		speed = elevatorM.get();
+		//
+		// JMB -- THIS SHOULD BE > 0....  that's why it wasn't working!
+		//
 		if (speed < 0) {
 			if (startEncoderCount == 0) {
 				startTime = System.currentTimeMillis();
