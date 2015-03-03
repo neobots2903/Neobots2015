@@ -6,7 +6,7 @@ import org.usfirst.frc.team2903.robot.RobotMap;
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class AutoToteLift extends Command {
+public class AutoRecyclingbinLift extends Command {
 
 	public Talon leftFrontMotor1 = new Talon(RobotMap.HDriveM2);
 	public Talon rightFrontMotor1 = new Talon(RobotMap.HDriveM3);
