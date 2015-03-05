@@ -27,5 +27,7 @@ public class RobotMap {
 	public static int LEFTSOLCLOSE = 7;
 	//Sol
 	public static int brakeSol = 3;
+	//Gyro
+	public static int Gyro = 8;
     
 }
