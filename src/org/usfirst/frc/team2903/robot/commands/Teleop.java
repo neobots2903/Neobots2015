@@ -5,8 +5,10 @@ import org.usfirst.frc.team2903.robot.Robot;
 
 import com.sun.glass.ui.Timer;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.vision.USBCamera;
 
 public class Teleop extends Command {
 
@@ -18,11 +20,12 @@ public class Teleop extends Command {
 
     protected void initialize() {
     	//Robot.elevatorSubsystem.encoder.reset();
+    	
     }
 
    // @SuppressWarnings("deprecation")
 	protected void execute() {
-    		Robot.elevatorSubsystem.speedControl();
+    	Robot.elevatorSubsystem.speedControl();
 		Robot.elevatorSubsystem.moveElevatorUpCheck();
 		Robot.elevatorSubsystem.moveElevatorDownCheck();
     	//Robot.driveSubsystem.drive(OI.controller.getRawAxis(0), OI.controller.getRawAxis(2),OI.controller.getRawAxis(1));
@@ -51,6 +54,9 @@ public class Teleop extends Command {
     	SmartDashboard.putNumber("Encoder", Robot.elevatorSubsystem.encoder.get());
     	SmartDashboard.putNumber("Tote Height", Robot.elevatorSubsystem.toteHeight);
     	SmartDashboard.putBoolean("Top Limit", Robot.elevatorSubsystem.topLimitAct);
+    	SmartDashboard.putNumber("Elevator Speed", Robot.elevatorSubsystem.elevatorSpeed());
+    	
+
     }
 
     protected boolean isFinished() {

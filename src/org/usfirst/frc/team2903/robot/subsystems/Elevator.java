@@ -1,8 +1,10 @@
 package org.usfirst.frc.team2903.robot.subsystems;
 
+import org.usfirst.frc.team2903.robot.OI;
 import org.usfirst.frc.team2903.robot.RobotMap;
 
 //import com.sun.webkit.Timer;
+
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
@@ -23,8 +25,9 @@ public class Elevator extends Subsystem {
 	public boolean topLimitAct = upperLimit.get();
 	int heightValue = 0;
 	public int toteHeight = 0;
-	public double speedUp = 0.5;
+	//public double speedUp = 0.5;
 
+	private double upSpeed = OI.Joy2.getZ();
 	private int startEncoderCount;
 	private int endEncoderCount;
 	private long startTime;
@@ -53,10 +56,7 @@ public class Elevator extends Subsystem {
 
 	public void speedControl() {
 		speed = elevatorM.get();
-		//
-		// JMB -- THIS SHOULD BE > 0....  that's why it wasn't working!
-		//
-		if (speed < 0) {
+		if (speed > 0) {
 			if (startEncoderCount == 0) {
 				startTime = System.currentTimeMillis();
 				startEncoderCount = count();
@@ -116,25 +116,25 @@ public class Elevator extends Subsystem {
 		}
 		switch (toteHeight) {
 		case 1:
-			elevatorM.set(speedUp);
+			elevatorM.set(upSpeed);
 			if (tote1Min < count() && count() < tote1Max) {
 				elevatorM.set(0);
 			}
 			break;
 		case 2:
-			elevatorM.set(speedUp);
+			elevatorM.set(upSpeed);
 			if (tote2Min < count() && count() < tote2Max) {
 				elevatorM.set(0);
 			}
 			break;
 		case 3:
-			elevatorM.set(speedUp);
+			elevatorM.set(upSpeed);
 			if (tote3Min < count() && count() < tote3Max) {
 				elevatorM.set(0);
 			}
 			break;
 		case 4:
-			elevatorM.set(speedUp);
+			elevatorM.set(upSpeed);
 			if (tote4Min < count() && count() < tote4Max) {
 				elevatorM.set(0);
 			}
@@ -278,11 +278,14 @@ public class Elevator extends Subsystem {
 		// }
 		// if (bottomLimit.equals(true)) {
 		// elevatorM.set(0);
-		// encoder.reset();
+		 encoder.reset();
 		// toteHeight = 0;
 		// }
 		// }
 		startTime = 0;
 		startEncoderCount = 0;
+	}
+	public double elevatorSpeed(){
+		return elevatorM.getSpeed();
 	}
 }
