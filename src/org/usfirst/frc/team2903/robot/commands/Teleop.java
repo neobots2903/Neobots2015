@@ -54,7 +54,7 @@ public class Teleop extends Command {
     	SmartDashboard.putNumber("Encoder", Robot.elevatorSubsystem.encoder.get());
     	SmartDashboard.putNumber("Tote Height", Robot.elevatorSubsystem.toteHeight);
     	SmartDashboard.putBoolean("Top Limit", Robot.elevatorSubsystem.topLimitAct);
-    	SmartDashboard.putNumber("Elevator Speed", Robot.elevatorSubsystem.elevatorSpeed());
+    	SmartDashboard.putNumber("autoSpeed",Robot.elevatorSubsystem.getAutoSpeed());
     	
 
     }
