@@ -82,7 +82,7 @@ public class Elevator extends Subsystem {
 					}
 
 				}
-			
+
 				startTime = endTime;
 				startEncoderCount = endEncoderCount;
 				elevatorM.set(autoSpeed);
@@ -109,27 +109,27 @@ public class Elevator extends Subsystem {
 			switch (toteHeight) {
 			case 1:
 				elevatorM.set(upSpeed);
-				 if (count() >= tote1Min){
-				 elevatorM.set(0);
-				 }
+				if (count() >= tote1Min) {
+					elevatorM.set(0);
+				}
 				break;
 			case 2:
 				elevatorM.set(upSpeed);
-				if (tote2Min < count()){
+				if (tote2Min < count()) {
 					SmartDashboard.putString("debug", "127");
 					elevatorM.set(0);
 				}
 				break;
 			case 3:
 				elevatorM.set(upSpeed);
-				if (tote3Min < count()){
+				if (tote3Min < count()) {
 					SmartDashboard.putString("debug", "134");
 					elevatorM.set(0);
 				}
 				break;
 			case 4:
 				elevatorM.set(upSpeed);
-				if (tote4Min < count()){
+				if (tote4Min < count()) {
 					SmartDashboard.putString("debug", "141");
 					elevatorM.set(0);
 				}
@@ -141,37 +141,44 @@ public class Elevator extends Subsystem {
 		}
 	}
 
-	public void moveElevatorUpCheck() {
+	public boolean moveElevatorUpCheck() {
+		boolean atRequestedHeight = false;
 		if (movingUp) {
 			if (toteHeight <= 4) {
-				 switch (toteHeight) {
-				 case 1:
-				 if (tote1Min <= count()){ 
-				 elevatorM.set(0);
-				 }
-				 break;
-				 case 2:
-				 if (tote2Min <= count()) { 
-				 elevatorM.set(0);
-				 }
-				 break;
-				 case 3:
-				 if (tote3Min <= count()) { 
-				 elevatorM.set(0);
-				 }
-				 break;
-				 case 4:
-				 if (tote4Min <= count()) { 
-				 elevatorM.set(0);
-				 }
-				 break;
-				
-				 default:
-				 elevatorM.set(0);
-				 break;
-				 }
+				switch (toteHeight) {
+				case 1:
+					if (tote1Min <= count()) {
+						elevatorM.set(0);
+						atRequestedHeight = true;
+					}
+					break;
+				case 2:
+					if (tote2Min <= count()) {
+						elevatorM.set(0);
+						atRequestedHeight = true;
+					}
+					break;
+				case 3:
+					if (tote3Min <= count()) {
+						elevatorM.set(0);
+						atRequestedHeight = true;
+					}
+					break;
+				case 4:
+					if (tote4Min <= count()) {
+						elevatorM.set(0);
+						atRequestedHeight = true;
+					}
+					break;
+
+				default:
+					elevatorM.set(0);
+					atRequestedHeight = true;
+					break;
+				}
 			}
 		}
+		return atRequestedHeight;
 	}
 
 	/**
@@ -240,7 +247,8 @@ public class Elevator extends Subsystem {
 
 	}
 
-	public void moveElevatorDownCheck() {
+	public boolean moveElevatorDownCheck() {
+		boolean atRequestedHeight = false;
 		if (!movingUp) {
 			switch (toteHeight) {
 			case 0:
@@ -248,6 +256,7 @@ public class Elevator extends Subsystem {
 					SmartDashboard.putString("debug", "294");
 					elevatorM.set(0);
 					brakeSol.set(false);
+					atRequestedHeight = true;
 				}
 				break;
 			case 1:
@@ -255,6 +264,7 @@ public class Elevator extends Subsystem {
 					SmartDashboard.putString("debug", "302");
 					elevatorM.set(0);
 					brakeSol.set(false);
+					atRequestedHeight = true;
 				}
 				break;
 			case 2:
@@ -262,6 +272,7 @@ public class Elevator extends Subsystem {
 					SmartDashboard.putString("debug", "310");
 					elevatorM.set(0);
 					brakeSol.set(false);
+					atRequestedHeight = true;
 				}
 				break;
 			case 3:
@@ -269,13 +280,16 @@ public class Elevator extends Subsystem {
 					SmartDashboard.putString("debug", "318");
 					elevatorM.set(0);
 					brakeSol.set(false);
+					atRequestedHeight = true;
 				}
 				break;
 
 			default:
+				atRequestedHeight = true;
 				break;
 			}
 		}
+		return atRequestedHeight;
 	}
 
 	public void elevatorReset() {

@@ -25,12 +25,17 @@ public class Teleop extends Command {
 
    // @SuppressWarnings("deprecation")
 	protected void execute() {
+		
+/* this is done in the elevator up and down commands		
     	Robot.elevatorSubsystem.speedControl();
 		Robot.elevatorSubsystem.moveElevatorUpCheck();
 		Robot.elevatorSubsystem.moveElevatorDownCheck();
+*/
     	//Robot.driveSubsystem.drive(OI.controller.getRawAxis(0), OI.controller.getRawAxis(2),OI.controller.getRawAxis(1));
-    	Robot.driveSubsystem.drive(OI.Joy2.getX(), OI.Joy1.getY(), OI.Joy1.getX());
-    	if(OI.controller.getRawButton(5)){
+  		Robot.driveSubsystem.drive(OI.Joy2.getX(), OI.Joy1.getY(), OI.Joy1.getX());
+  
+  		// these could also be done in commands, but they work just as well here...
+  		if(OI.controller.getRawButton(5)){
     		Robot.pneumaticsSubsystem.leftarmopen();
     	}if(OI.controller.getRawButton(6)){
     		Robot.pneumaticsSubsystem.rightarmopen();
@@ -39,6 +44,11 @@ public class Teleop extends Command {
     	}if(OI.controller.getRawButton(8)){
     		Robot.pneumaticsSubsystem.rightarmclose();
     	}
+
+    	
+/*
+ *  This is done in the ElevatorUp, Down and Reset commands
+ *   
     	if(OI.controller.getRawButton(2)){
     		Robot.elevatorSubsystem.moveElevatorUp();
     		edu.wpi.first.wpilibj.Timer.delay(.1);
@@ -50,7 +60,7 @@ public class Teleop extends Command {
     		Robot.elevatorSubsystem.toteHeight = 0;
     		Robot.elevatorSubsystem.elevatorReset();
     	}
-    	
+*/
     	SmartDashboard.putNumber("Encoder", Robot.elevatorSubsystem.encoder.get());
     	SmartDashboard.putNumber("Tote Height", Robot.elevatorSubsystem.toteHeight);
     	SmartDashboard.putBoolean("Top Limit", Robot.elevatorSubsystem.topLimitAct);
