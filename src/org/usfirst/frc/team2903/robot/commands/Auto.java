@@ -20,7 +20,7 @@ public class Auto extends Command {
 	}
 
 	protected void initialize() {
-			float autoForwardSpeed = (float) .25;
+			double autoForwardSpeed = (double) 0.25;
 			int autoDuration = 2000;
 			long startTime = System.currentTimeMillis();
 			long stopTime = startTime;
