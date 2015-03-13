@@ -1,26 +1,48 @@
 package org.usfirst.frc.team2903.robot.commands;
 
-public class Auto extends AutoBase {
+//import org.usfirst.frc.team2903.robot.OI;
+import org.usfirst.frc.team2903.robot.Robot;
 
-	public void forward() {
-		long startTime = System.currentTimeMillis();
-		long stopTime = startTime;
+import edu.wpi.first.wpilibj.command.Command;
 
-		rightFrontMotor1.set(1);
-		leftFrontMotor1.set(1);
-		leftBackMotor1.set(1);
-		rightBackMotor1.set(1);
+public class Auto extends Command {
 
-		while (stopTime <= (startTime + 2000)) {
+	public Auto (){
+		requires(Robot.driveSubsystem);
+	}
+	
+	protected void end() {
+		
+	}
 
-			stopTime = System.currentTimeMillis();
+	protected void execute() {
+		
+	}
 
+	protected void initialize() {
+			float autoForwardSpeed = (float) .25;
+			int autoDuration = 2000;
+			long startTime = System.currentTimeMillis();
+			long stopTime = startTime;
+
+			Robot.driveSubsystem.drive(0,autoForwardSpeed,0);
+			
+			while (stopTime <= (startTime + autoDuration)) {
+
+				stopTime = System.currentTimeMillis();
+
+			}
+
+			Robot.driveSubsystem.drive(0,0,0);
+			
 		}
 
-		rightFrontMotor1.set(0);
-		leftFrontMotor1.set(0);
-		leftBackMotor1.set(0);
-		rightBackMotor1.set(0);
+	protected void interrupted() {
+		
+	}
+
+	protected boolean isFinished() {
+		return false;
 	}
 
 }
