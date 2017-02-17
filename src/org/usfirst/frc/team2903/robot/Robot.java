@@ -32,10 +32,11 @@ public class Robot extends IterativeRobot {
     
     /**
      * This function is run when the robot is first started up and should be
-     * used for any initialization code.      */
+     * used for any initialization code.
+     */
     public void robotInit() {
 		oi = new OI();
-        //autonomousCommand = new Auto();
+        autonomousCommand = new Auto();
         teleopCommand = new Teleop();
         CameraServer server = CameraServer.getInstance();
     	server.setQuality(50);

@@ -30,4 +30,8 @@ public class RobotMap {
 	//Gyro
 	public static int Gyro = 8;
     
+	// Elevator
+	public static int ELEVATOR_UP = 2;
+	public static int ELEVTOR_DOWN = 3;
+	public static int ELEVATOR_RESET = 4;
 }

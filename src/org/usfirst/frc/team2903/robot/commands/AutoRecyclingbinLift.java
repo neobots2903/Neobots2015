@@ -5,38 +5,57 @@ import org.usfirst.frc.team2903.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class AutoRecyclingbinLift extends AutoBase {
-	
-	public void forward () {
+public class AutoRecyclingbinLift extends Command {
+
+
+
+
+	protected void initDefaultCommand() {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	protected void initialize() {
+		SmartDashboard.putString("autoMode","9");
+		double autoForwardSpeed = -0.8;
+		int autoDuration = 1000;
 		long startTime = System.currentTimeMillis();
 		long stopTime = startTime;
+
 		
-		Robot.elevatorSubsystem.moveElevatorUp();
-		//Robot.elevatorSubsystem.moveElevatorUp();
 		
-		Robot.pneumaticsSubsystem.closearms();
-
-		rightFrontMotor1.set(1);
-		leftFrontMotor1.set(1);
-		leftBackMotor1.set(1);
-		rightBackMotor1.set(1);
-
-		while (stopTime <= (startTime + 5000)) {
-
+		while (stopTime <= (startTime + autoDuration)) {
+			Robot.driveSubsystem.drive(0,autoForwardSpeed,0);
 			stopTime = System.currentTimeMillis();
 
 		}
 
-		rightFrontMotor1.set(0);
-		leftFrontMotor1.set(0);
-		leftBackMotor1.set(0);
-		rightBackMotor1.set(0);
-		
-		//Robot.elevatorSubsystem.moveElevatorDown();
-		Robot.elevatorSubsystem.moveElevatorDown();
-		
-		Robot.pneumaticsSubsystem.openarms();
+		Robot.driveSubsystem.drive(0,0,0);	
 	}
 
+	@Override
+	protected void execute() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected boolean isFinished() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	protected void end() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void interrupted() {
+		// TODO Auto-generated method stub
+		
+	}
 }

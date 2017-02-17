@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -31,33 +32,36 @@ public class Elevator extends Subsystem {
 	private long endTime;
 	private float rateMovement;
 	private float upwardRate = 160;
-	private float downwardRate = -180;
-	private float rateAdjust = 5;
-	private double speedAdjust = 0.1;
+	private float downwardRate = -160;
+	private float rateAdjust;
+	private double speedAdjust = 0.05;
 	private double autoSpeed;
 	private boolean movingUp = true;
 
 	int tote0Min = 0;
 	int tote0Max = 20;
-	int tote1Min = 470;
-	int tote1Max = 490;
-	int tote2Min = 760;
-	int tote2Max = 780;
-	int tote3Min = 1000;
-	int tote3Max = 1020;
-	int tote4Min = 1170;
-	int tote4Max = 1190;
+	int tote1Min = 195;
+	int tote1Max = 215;
+	int tote2Min = 450;
+	int tote2Max = 470;
+	int tote3Min = 740;
+	int tote3Max = 760;
+	int tote4Min = 980;
+	int tote4Max = 1000;
+	int tote5Min = 1150;
+	int tote5Max = 1170;
+	
 	int flex = 25;// +and- flex
 
 	public void initDefaultCommand() {
-		autoSpeed = 0.5;
+		autoSpeed = 0.1;
 		movingUp = true;
 	}
 
 	public void speedControl() {
 		SmartDashboard.putString("debug", "entering speed control");
-		autoSpeed = elevatorM.get();
-		if (autoSpeed > 0) {
+		double speed = elevatorM.get();
+		if (speed > 0) {
 			if (startEncoderCount == 0) {
 				startTime = System.currentTimeMillis();
 				startEncoderCount = count();
@@ -82,7 +86,7 @@ public class Elevator extends Subsystem {
 					}
 
 				}
-			
+
 				startTime = endTime;
 				startEncoderCount = endEncoderCount;
 				elevatorM.set(autoSpeed);
@@ -97,40 +101,44 @@ public class Elevator extends Subsystem {
 		return encoder.get();
 	}
 
-	// public void elevatorMotor(double value) {
-	// elevatorM.set(value);
-	// }
-
 	public void moveElevatorUp() {
-		if (toteHeight < 4) {
+		if (toteHeight < 5) {
 			toteHeight++;
 			movingUp = true;
+			brakeSol.set(false);
 
 			switch (toteHeight) {
 			case 1:
 				elevatorM.set(upSpeed);
-				 if (count() >= tote1Min){
-				 elevatorM.set(0);
-				 }
+				if (count() >= tote1Min) {
+					SmartDashboard.putString("debug", "109");
+					elevatorM.set(0);
+				}
 				break;
 			case 2:
 				elevatorM.set(upSpeed);
-				if (tote2Min < count()){
+				if (tote2Min <= count()) {
 					SmartDashboard.putString("debug", "127");
 					elevatorM.set(0);
 				}
 				break;
 			case 3:
 				elevatorM.set(upSpeed);
-				if (tote3Min < count()){
+				if (tote3Min <= count()) {
 					SmartDashboard.putString("debug", "134");
 					elevatorM.set(0);
 				}
 				break;
 			case 4:
 				elevatorM.set(upSpeed);
-				if (tote4Min < count()){
+				if (tote4Min <= count()) {
 					SmartDashboard.putString("debug", "141");
+					elevatorM.set(0);
+				}
+			case 5:
+				elevatorM.set(upSpeed);
+				if (tote5Min <= count()) {
+					SmartDashboard.putString("debug", "139");
 					elevatorM.set(0);
 				}
 				break;
@@ -141,48 +149,75 @@ public class Elevator extends Subsystem {
 		}
 	}
 
-	public void moveElevatorUpCheck() {
+	public boolean moveElevatorUpCheck() {
+		boolean atRequestedHeight;
+		atRequestedHeight = false;
 		if (movingUp) {
-			if (toteHeight <= 4) {
-				 switch (toteHeight) {
-				 case 1:
-				 if (tote1Min <= count()){ 
-				 elevatorM.set(0);
-				 }
-				 break;
-				 case 2:
-				 if (tote2Min <= count()) { 
-				 elevatorM.set(0);
-				 }
-				 break;
-				 case 3:
-				 if (tote3Min <= count()) { 
-				 elevatorM.set(0);
-				 }
-				 break;
-				 case 4:
-				 if (tote4Min <= count()) { 
-				 elevatorM.set(0);
-				 }
-				 break;
-				
-				 default:
-				 elevatorM.set(0);
-				 break;
-				 }
+
+			if (toteHeight <= 5) {
+				switch (toteHeight) {
+				case 1:
+					if (tote1Min <= count()) {
+						SmartDashboard.putString("debug", "148");
+						elevatorM.set(0);
+						atRequestedHeight = true;
+						// movingUp = false;
+
+					}
+					break;
+				case 2:
+					if (tote2Min <= count()) {
+						SmartDashboard.putString("debug", "155");
+						elevatorM.set(0);
+						// movingUp = false;
+						atRequestedHeight = true;
+					}
+					break;
+				case 3:
+					if (tote3Min <= count()) {
+						SmartDashboard.putString("debug", "162");
+						elevatorM.set(0);
+						// movingUp = false;
+						atRequestedHeight = true;
+					}
+					break;
+				case 4:
+					if (tote4Min <= count()) {
+						SmartDashboard.putString("debug", "169");
+						elevatorM.set(0);
+						// movingUp = false;
+						atRequestedHeight = true;
+					}
+					break;
+				case 5:
+					if (tote5Min <= count()) {
+						SmartDashboard.putString("debug", "169");
+						elevatorM.set(0);
+						// movingUp = false;
+						atRequestedHeight = true;
+					}
+					break;
+
+				default:
+					elevatorM.set(0);
+					// movingUp = false;
+					atRequestedHeight = true;
+					break;
+				}
 			}
 		}
+		SmartDashboard.putBoolean("@height", atRequestedHeight);
+		SmartDashboard.putBoolean("movingUp", movingUp);
+		return atRequestedHeight;
 	}
 
-	/**
-	 * 
-	 */
 	public void moveElevatorDown() {
 
 		if (toteHeight > 0) {
 			toteHeight--;
 			movingUp = false;
-
+			autoSpeed= 0.1;
+			
 			switch (toteHeight) {
 			case 0:
 				elevatorM.set(0.6);
@@ -191,7 +226,7 @@ public class Elevator extends Subsystem {
 				SmartDashboard.putString("debug", "222");
 				elevatorM.set(0);
 				if (count() < tote0Max) {
-					elevatorM.set(0);
+					//elevatorM.set(0);
 					brakeSol.set(false);
 				}
 				break;
@@ -231,6 +266,18 @@ public class Elevator extends Subsystem {
 					brakeSol.set(false);
 				}
 				break;
+			case 4:
+				elevatorM.set(0.6);
+				brakeSol.set(true);
+				edu.wpi.first.wpilibj.Timer.delay(.1);
+				SmartDashboard.putString("debug", "260");
+				elevatorM.set(0);
+				if (count() < tote4Max) {
+					SmartDashboard.putString("debug", "264");
+					elevatorM.set(0);
+					brakeSol.set(false);
+				}
+				break;
 			default:
 				SmartDashboard.putString("debug", "281");
 				elevatorM.set(0);
@@ -240,7 +287,8 @@ public class Elevator extends Subsystem {
 
 	}
 
-	public void moveElevatorDownCheck() {
+	public boolean moveElevatorDownCheck() {
+		boolean atRequestedHeight = false;
 		if (!movingUp) {
 			switch (toteHeight) {
 			case 0:
@@ -248,6 +296,7 @@ public class Elevator extends Subsystem {
 					SmartDashboard.putString("debug", "294");
 					elevatorM.set(0);
 					brakeSol.set(false);
+					atRequestedHeight = true;
 				}
 				break;
 			case 1:
@@ -255,6 +304,7 @@ public class Elevator extends Subsystem {
 					SmartDashboard.putString("debug", "302");
 					elevatorM.set(0);
 					brakeSol.set(false);
+					atRequestedHeight = true;
 				}
 				break;
 			case 2:
@@ -262,6 +312,7 @@ public class Elevator extends Subsystem {
 					SmartDashboard.putString("debug", "310");
 					elevatorM.set(0);
 					brakeSol.set(false);
+					atRequestedHeight = true;
 				}
 				break;
 			case 3:
@@ -269,20 +320,46 @@ public class Elevator extends Subsystem {
 					SmartDashboard.putString("debug", "318");
 					elevatorM.set(0);
 					brakeSol.set(false);
+					atRequestedHeight = true;
+				}
+				break;
+			case 4:
+				if (count() < tote4Max) {
+					SmartDashboard.putString("debug", "318");
+					elevatorM.set(0);
+					brakeSol.set(false);
+					atRequestedHeight = true;
 				}
 				break;
 
 			default:
+				atRequestedHeight = true;
 				break;
 			}
 		}
+		return atRequestedHeight;
 	}
 
 	public void elevatorReset() {
 		encoder.reset();
-		moveElevatorDown();
+		elevatorM.set(0.6);
+		brakeSol.set(true);
+		Timer.delay(0.1);
 		startTime = 0;
 		startEncoderCount = 0;
+		elevatorM.set(0);
+	}
+	
+	public void manualElevator(double speed){
+		elevatorM.set(speed);
+	}
+	
+	public void brake(boolean brakeOff){
+		if(brakeOff = true){
+		brakeSol.set(true);
+		}else{
+			brakeSol.set(false);
+		}
 	}
 
 	public double elevatorSpeed() {

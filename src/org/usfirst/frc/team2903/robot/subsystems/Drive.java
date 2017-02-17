@@ -11,7 +11,7 @@ public class Drive extends Subsystem {
 	public RobotDrive hDrive = new RobotDrive(RobotMap.HDriveM1,
 			RobotMap.HDriveM2, RobotMap.HDriveM3, RobotMap.HDriveM4);
 
-	public void drive(double xAxis, double yAxis, double mid) {
+	public void drive(double xAxis, double yAxis, double mid) {//xaxis rotates, yaxis forward and back, mid goes side to side
 		hDrive.arcadeDrive(yAxis, xAxis);
 		middleMotor1.set(-mid);
 	}
